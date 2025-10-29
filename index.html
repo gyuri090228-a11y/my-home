@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박규리 포트폴리오 - 다양하고 눈부신 이야기</title>
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter 폰트 사용 설정 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* 눈부신 느낌을 위한 진한 배경 */
+            background-color: #0d1117; /* Dark but not pure black */
+            color: #e5e7eb;
+        }
+        /* 눈부신 그라데이션 버튼/경계 */
+        .dazzling-gradient {
+            background-image: linear-gradient(to right, #f97316, #ef4444, #8b5cf6, #ec4899);
+        }
+        .dazzling-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #fcd34d, #f97316, #8b5cf6);
+        }
+        /* 프로젝트 카드 호버 효과 */
+        .project-card {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background-color: #1a202c; /* Dark card background */
+        }
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.5), 0 4px 6px -2px rgba(139, 92, 246, 0.1); /* Purple glow */
+        }
+        /* 커스텀 메시지 박스 스타일 */
+        #messageBox {
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- 메시지 박스 (Alert 대체) -->
+    <div id="messageBox" class="fixed hidden p-6 bg-gray-800 rounded-xl shadow-2xl border border-purple-500">
+        <h3 id="messageTitle" class="text-xl font-bold mb-3 dazzling-text"></h3>
+        <p id="messageContent" class="text-gray-300 mb-5"></p>
+        <button onclick="hideMessageBox()" class="w-full py-2 rounded-lg text-white font-bold dazzling-gradient hover:opacity-90 transition">닫기</button>
+    </div>
+
+    <!-- 헤더 / 히어로 섹션 -->
+    <header class="pt-16 pb-24 text-center dazzling-gradient">
+        <div class="container mx-auto px-4">
+            <h1 class="text-6xl sm:text-7xl font-extrabold mb-4 text-white uppercase tracking-wider animate-pulse">
+                박규리
+            </h1>
+            <p class="text-2xl sm:text-3xl font-light text-white opacity-80">
+                명신여자고등학교 1학년 | 앱 & 챗봇 개발자 지망생
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16">
+
+        <!-- 1. 소개 섹션 -->
+        <section id="introduction" class="mb-20">
+            <h2 class="text-4xl font-extrabold mb-8 text-center dazzling-text">
+                👋 저를 소개합니다: 규리의 다채로운 세상
+            </h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
+                <!-- 취미 카드 -->
+                <div class="p-8 rounded-xl project-card">
+                    <div class="text-5xl mb-4">🎬</div>
+                    <h3 class="text-2xl font-bold mb-2 text-purple-400">다양한 영화 감상</h3>
+                    <p class="text-gray-400">
+                        저의 가장 큰 취미는 영화를 보는 것입니다. 장르를 가리지 않고 다양한 시각과 스토리를 통해 세상을 배우고 새로운 영감을 얻습니다. 영화 속의 창의적인 요소를 개발에 접목하는 것을 좋아합니다.
+                    </p>
+                </div>
+                <!-- 목표 카드 -->
+                <div class="p-8 rounded-xl project-card">
+                    <div class="text-5xl mb-4">💡</div>
+                    <h3 class="text-2xl font-bold mb-2 text-pink-400">앱 & 챗봇 개발</h3>
+                    <p class="text-gray-400">
+                        세상의 문제를 해결하고 사람들과 소통하는 앱과 챗봇을 만드는 것이 목표입니다. 다양한 기술을 배우고 적용하여 저만의 아이디어를 실현해 나갈 것입니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 눈부신 작품 (포트폴리오) 섹션 -->
+        <section id="projects" class="mb-20">
+            <h2 class="text-4xl font-extrabold mb-12 text-center dazzling-text">
+                ✨ My Dazzling Projects (작품 자랑)
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- 프로젝트 1 (챗봇) -->
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('감성 영화 추천 챗봇', '사용자의 현재 기분을 분석하여 가장 어울리는 영화를 추천해주는 AI 챗봇입니다. (Python, Gemini API 활용 예정)')">
+                    <span class="text-4xl block mb-3">🤖</span>
+                    <h3 class="text-xl font-bold mb-2 text-orange-400">감성 영화 추천 챗봇 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#AI #챗봇 #영화 #개인화</p>
+                    <p class="text-gray-400 text-sm">현재 기획 중인 프로젝트입니다. 영화에 대한 애정을 담아 사용자 맞춤형 추천 기능을 구현할 예정입니다.</p>
+                </div>
+
+                <!-- 프로젝트 2 (앱) -->
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('학교 생활 캘린더 앱', '명신여고 학생들을 위한 맞춤형 학사 일정 관리 및 스터디 그룹 매칭 모바일 앱입니다. (React Native 예정)')">
+                    <span class="text-4xl block mb-3">🗓️</span>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">학교 생활 캘린더 앱 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#모바일앱 #학교생활 #커뮤니티 #생산성</p>
+                    <p class="text-gray-400 text-sm">학교 친구들과 함께 쓸 수 있는 유용한 도구를 만들어 보고 싶습니다.</p>
+                </div>
+
+                <!-- 프로젝트 3 (데이터 시각화) -->
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('내가 본 영화 통계 대시보드', '관람한 영화 데이터를 수집하여 장르, 감독, 배우별 통계를 인터랙티브하게 시각화하는 웹사이트입니다. (D3.js 예정)')">
+                    <span class="text-4xl block mb-3">📊</span>
+                    <h3 class="text-xl font-bold mb-2 text-yellow-400">영화 시각화 대시보드 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#데이터분석 #시각화 #웹개발 #취미</p>
+                    <p class="text-gray-400 text-sm">취미를 데이터로 분석하며 개발 실력을 향상시키고자 합니다.</p>
+                </div>
+
+                <!-- 프로젝트 4 (자율 프로젝트) -->
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('미래의 아이디어 공간', '앞으로 배우고 싶은 기술과 새로운 아이디어를 정리하고 구체화할 프로젝트를 위한 공간입니다.')">
+                    <span class="text-4xl block mb-3">🚀</span>
+                    <h3 class="text-xl font-bold mb-2 text-blue-400">Next Project (구상 중)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#아이디어 #기술스택 #신규도전</p>
+                    <p class="text-gray-400 text-sm">항상 새로운 기술에 도전하고, 사용자에게 가치를 줄 수 있는 프로젝트를 고민합니다.</p>
+                </div>
+
+                <!-- (반응형 데모를 위해 더미 프로젝트 2개 추가) -->
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('더미 프로젝트 5', '반응형 레이아웃 데모를 위한 더미 프로젝트입니다.')">
+                    <span class="text-4xl block mb-3">🌟</span>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">더미 프로젝트 5</h3>
+                    <p class="text-sm text-gray-500 mb-3">#Demo #Placeholder</p>
+                    <p class="text-gray-400 text-sm">레이아웃 테스트용입니다.</p>
+                </div>
+
+                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('더미 프로젝트 6', '반응형 레이아웃 데모를 위한 더미 프로젝트입니다.')">
+                    <span class="text-4xl block mb-3">🌈</span>
+                    <h3 class="text-xl font-bold mb-2 text-indigo-400">더미 프로젝트 6</h3>
+                    <p class="text-sm text-gray-500 mb-3">#Demo #Placeholder</p>
+                    <p class="text-gray-400 text-sm">레이아웃 테스트용입니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-800 py-8 mt-10 text-center text-gray-400">
+        <p class="text-sm">
+            © 2025 박규리 포트폴리오 | 개발자로 성장하는 이야기
+        </p>
+        <p class="text-xs mt-2">
+            명신여고 박규리 학생을 응원합니다!
+        </p>
+    </footer>
+
+    <!-- 자바스크립트 for Interactivity (메시지 박스) -->
+    <script>
+        /**
+         * alert() 대신 사용할 커스텀 메시지 박스를 보여줍니다.
+         * @param {string} title - 메시지 박스의 제목
+         * @param {string} content - 메시지 박스의 내용
+         */
+        function showMessageBox(title, content) {
+            document.getElementById('messageTitle').textContent = title;
+            document.getElementById('messageContent').textContent = content;
+            document.getElementById('messageBox').classList.remove('hidden');
+        }
+
+        /**
+         * 메시지 박스를 숨깁니다.
+         */
+        function hideMessageBox() {
+            document.getElementById('messageBox').classList.add('hidden');
+        }
+
+        // 초기 로드 시 메시지 박스 닫기
+        document.addEventListener('DOMContentLoaded', hideMessageBox);
