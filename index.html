@@ -1,187 +1,384 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>박규리 포트폴리오 - 다양하고 눈부신 이야기</title>
-    <!-- Tailwind CSS CDN 로드 -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter 폰트 사용 설정 -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* 눈부신 느낌을 위한 진한 배경 */
-            background-color: #0d1117; /* Dark but not pure black */
-            color: #e5e7eb;
-        }
-        /* 눈부신 그라데이션 버튼/경계 */
-        .dazzling-gradient {
-            background-image: linear-gradient(to right, #f97316, #ef4444, #8b5cf6, #ec4899);
-        }
-        .dazzling-text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, #fcd34d, #f97316, #8b5cf6);
-        }
-        /* 프로젝트 카드 호버 효과 */
-        .project-card {
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            border: 1px solid transparent;
-            background-color: #1a202c; /* Dark card background */
-        }
-        .project-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.5), 0 4px 6px -2px rgba(139, 92, 246, 0.1); /* Purple glow */
-        }
-        /* 커스텀 메시지 박스 스타일 */
-        #messageBox {
-            z-index: 1000;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박규리 포트폴리오 - 다양하고 눈부신 이야기</title>
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter 폰트 사용 설정 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* 화사하고 밝은 배경 */
+            background-color: #f5f7fa; /* Very light gray/off-white */
+            color: #1f2937; /* Dark text for contrast */
+        }
+        /* 눈부신 그라데이션 버튼/경계 - 밝고 생기있는 색상 */
+        .dazzling-gradient {
+            background-image: linear-gradient(to right, #38bdf8, #8b5cf6, #ec4899); /* Cyan, Purple, Pink */
+        }
+        .dazzling-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #10b981, #3b82f6, #ec4899); /* Bright Green, Blue, Pink */
+        }
+        /* 프로젝트 카드 호버 효과 - 밝은 배경에 적합하게 조정 */
+        .project-card {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: 1px solid #e5e7eb; /* Light border */
+            background-color: #ffffff; /* White card background */
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.2), 0 4px 6px -2px rgba(139, 92, 246, 0.05); /* Lighter purple glow */
+            border-color: #a78bfa; /* Subtle highlight on hover */
+        }
+        /* 커스텀 메시지 박스 스타일 - 밝은 배경에 맞춰 변경 */
+        #messageBox {
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            background-color: #ffffff;
+            color: #1f2937;
+            border: 1px solid #8b5cf6;
+        }
+    </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- 메시지 박스 (Alert 대체) -->
-    <div id="messageBox" class="fixed hidden p-6 bg-gray-800 rounded-xl shadow-2xl border border-purple-500">
-        <h3 id="messageTitle" class="text-xl font-bold mb-3 dazzling-text"></h3>
-        <p id="messageContent" class="text-gray-300 mb-5"></p>
-        <button onclick="hideMessageBox()" class="w-full py-2 rounded-lg text-white font-bold dazzling-gradient hover:opacity-90 transition">닫기</button>
-    </div>
+    <!-- 메시지 박스 (Alert 대체) -->
+    <div id="messageBox" class="fixed hidden p-6 bg-white rounded-xl shadow-2xl border border-purple-500">
+        <h3 id="messageTitle" class="text-xl font-bold mb-3 dazzling-text"></h3>
+        <p id="messageContent" class="text-gray-600 mb-5"></p>
+        <button onclick="hideMessageBox()" class="w-full py-2 rounded-lg text-white font-bold dazzling-gradient hover:opacity-90 transition">닫기</button>
+    </div>
 
-    <!-- 헤더 / 히어로 섹션 -->
-    <header class="pt-16 pb-24 text-center dazzling-gradient">
-        <div class="container mx-auto px-4">
-            <h1 class="text-6xl sm:text-7xl font-extrabold mb-4 text-white uppercase tracking-wider animate-pulse">
-                박규리
-            </h1>
-            <p class="text-2xl sm:text-3xl font-light text-white opacity-80">
-                명신여자고등학교 1학년 | 앱 & 챗봇 개발자 지망생
-            </p>
-        </div>
-    </header>
+    <!-- 헤더 / 히어로 섹션 - 밝은 그라데이션 배경 -->
+    <header class="pt-16 pb-24 text-center dazzling-gradient shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-6xl sm:text-7xl font-extrabold mb-4 text-white uppercase tracking-wider animate-pulse">
+                박규리
+            </h1>
+            <p class="text-2xl sm:text-3xl font-light text-white opacity-90">
+                명신여자고등학교 1학년 | 앱 & 챗봇 개발자 지망생
+            </p>
+        </div>
+    </header>
 
-    <main class="container mx-auto px-4 py-16">
+    <main class="container mx-auto px-4 py-16">
 
-        <!-- 1. 소개 섹션 -->
-        <section id="introduction" class="mb-20">
+        <!-- 1. 핵심 관심 영역 및 목표 (프로젝트화) 섹션 -->
+        <section id="introduction" class="mb-20">
+            <h2 class="text-4xl font-extrabold mb-8 text-center dazzling-text">
+                🌟 규리님의 핵심 관심 영역 및 목표 프로젝트
+            </h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
+                <!-- 관심 영역 1 (영화 기반 창의력 프로젝트) -->
+                <div class="p-8 rounded-xl project-card shadow-md">
+                    <div class="text-5xl mb-4">🎬</div>
+                    <h3 class="text-2xl font-bold mb-2 text-purple-600">영화 기반 창의력 프로젝트</h3>
+                    <p class="text-gray-700">
+                        영화에서 얻는 영감을 바탕으로 스토리텔링과 창의적인 시각 요소를 개발에 접목합니다. 감성 AI 챗봇 및 데이터 시각화 프로젝트의 주요 동력입니다.
+                    </p>
+                </div>
+                <!-- 관심 영역 2 (AI/기술 기반 핵심 목표) -->
+                <div class="p-8 rounded-xl project-card shadow-md">
+                    <div class="text-5xl mb-4">💡</div>
+                    <h3 class="text-2xl font-bold mb-2 text-pink-600">AI/기술 기반 핵심 목표</h3>
+                    <p class="text-gray-700">
+                        사람들의 일상 문제를 해결하는 실용적인 앱과 챗봇을 만드는 것이 가장 큰 목표입니다. React Native, Python, Web Tech 등 다양한 기술 스택을 익히고 있습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 눈부신 작품 (포트폴리오) 섹션 -->
+        <section id="projects" class="mb-20">
+            <h2 class="text-4xl font-extrabold mb-12 text-center dazzling-text">
+                ✨ My Dazzling Projects (작품 자랑)
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- 프로젝트 1 (챗봇) -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('감성 영화 추천 챗봇', '사용자의 현재 기분을 분석하여 가장 어울리는 영화를 추천해주는 AI 챗봇입니다. (Python, Gemini API 활용 예정)')">
+                    <span class="text-4xl block mb-3">🤖</span>
+                    <h3 class="text-xl font-bold mb-2 text-orange-500">감성 영화 추천 챗봇 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#AI #챗봇 #영화 #개인화</p>
+                    <p class="text-gray-700 text-sm">현재 기획 중인 프로젝트입니다. 영화에 대한 애정을 담아 사용자 맞춤형 추천 기능을 구현할 예정입니다.</p>
+                </div>
+
+                <!-- 프로젝트 2 (앱) -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('학교 생활 캘린더 앱', '명신여고 학생들을 위한 맞춤형 학사 일정 관리 및 스터디 그룹 매칭 모바일 앱입니다. (React Native 예정)')">
+                    <span class="text-4xl block mb-3">🗓️</span>
+                    <h3 class="text-xl font-bold mb-2 text-green-500">학교 생활 캘린더 앱 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#모바일앱 #학교생활 #커뮤니티 #생산성</p>
+                    <p class="text-gray-700 text-sm">학교 친구들과 함께 쓸 수 있는 유용한 도구를 만들어 보고 싶습니다.</p>
+                </div>
+
+                <!-- 프로젝트 3 (데이터 시각화) -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('내가 본 영화 통계 대시보드', '관람한 영화 데이터를 수집하여 장르, 감독, 배우별 통계를 인터랙티브하게 시각화하는 웹사이트입니다. (D3.js 예정)')">
+                    <span class="text-4xl block mb-3">📊</span>
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">영화 시각화 대시보드 (미정)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#데이터분석 #시각화 #웹개발 #취미</p>
+                    <p class="text-gray-700 text-sm">취미를 데이터로 분석하며 개발 실력을 향상시키고자 합니다.</p>
+                </div>
+
+                <!-- 프로젝트 4 (자율 프로젝트) -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('미래의 아이디어 공간', '앞으로 배우고 싶은 기술과 새로운 아이디어를 정리하고 구체화할 프로젝트를 위한 공간입니다.')">
+                    <span class="text-4xl block mb-3">🚀</span>
+                    <h3 class="text-xl font-bold mb-2 text-blue-500">Next Project (구상 중)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#아이디어 #기술스택 #신규도전</p>
+                    <p class="text-gray-700 text-sm">항상 새로운 기술에 도전하고, 사용자에게 가치를 줄 수 있는 프로젝트를 고민합니다.</p>
+                </div>
+
+                <!-- 프로젝트 5 (QR 코드 생성기) - 신규 추가 -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('QR 코드 생성 반응형 웹 앱', '사용자가 텍스트나 URL을 입력하면 즉시 QR 코드를 생성하고 다운로드할 수 있는 반응형 웹 애플리케이션입니다. (HTML, CSS, JavaScript 라이브러리 활용)')">
+                    <span class="text-4xl block mb-3">📸</span>
+                    <h3 class="text-xl font-bold mb-2 text-fuchsia-500">QR 코드 생성 웹 앱 (계획)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#WebDev #Utility #Responsive #Frontend</p>
+                    <p class="text-gray-700 text-sm">실용적인 프론트엔드 기능을 익히기 위한 간단한 유틸리티 프로젝트입니다.</p>
+                </div>
+
+                <!-- 프로젝트 6 (더미) -->
+                <div class="p-6 project-card shadow-lg" onclick="showMessageBox('추가 아이디어', '포트폴리오 확장을 위한 추가 프로젝트 아이디어 공간입니다.')">
+                    <span class="text-4xl block mb-3">🌈</span>
+                    <h3 class="text-xl font-bold mb-2 text-indigo-500">추가 프로젝트 (구상)</h3>
+                    <p class="text-sm text-gray-500 mb-3">#Growth #FuturePlan</p>
+                    <p class="text-gray-700 text-sm">앞으로 채워나갈 규리님의 잠재력 공간입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ✨ Gemini AI 아이디어 생성기 섹션 - 밝은 배경에 맞게 조정 -->
+        <section id="ai-inspiration" class="mb-20">
             <h2 class="text-4xl font-extrabold mb-8 text-center dazzling-text">
-                👋 저를 소개합니다: 규리의 다채로운 세상
+                🎬 영화 & 개발 아이디어 ✨ Gemini에게 영감 얻기
             </h2>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
-                <!-- 취미 카드 -->
-                <div class="p-8 rounded-xl project-card">
-                    <div class="text-5xl mb-4">🎬</div>
-                    <h3 class="text-2xl font-bold mb-2 text-purple-400">다양한 영화 감상</h3>
-                    <p class="text-gray-400">
-                        저의 가장 큰 취미는 영화를 보는 것입니다. 장르를 가리지 않고 다양한 시각과 스토리를 통해 세상을 배우고 새로운 영감을 얻습니다. 영화 속의 창의적인 요소를 개발에 접목하는 것을 좋아합니다.
-                    </p>
+            <div class="max-w-3xl mx-auto p-8 rounded-xl bg-white shadow-xl border border-purple-300">
+                <p class="text-gray-600 mb-4">현재 기분이나 만들고 싶은 앱/챗봇의 아이디어를 적어보세요. Gemini AI가 규리님에게 딱 맞는 영화 추천과 개발 아이디어 영감을 드립니다.</p>
+                <textarea id="ideaInput" rows="4" class="w-full p-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:ring-purple-500 focus:border-purple-500 mb-4" placeholder="예: 오늘 날씨가 너무 좋아서 설레는 기분이야. 이 기분과 어울리는 영화를 추천해줘." required></textarea>
+                
+                <button id="generateButton" onclick="generateIdea()" class="w-full py-3 rounded-lg text-white font-bold dazzling-gradient hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    ✨ AI 영화 & 아이디어 생성하기
+                </button>
+
+                <!-- 로딩 스피너 -->
+                <div id="loadingIndicator" class="hidden text-center mt-4">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto"></div>
+                    <p class="text-purple-600 mt-2">아이디어를 생성 중입니다...</p>
                 </div>
-                <!-- 목표 카드 -->
-                <div class="p-8 rounded-xl project-card">
-                    <div class="text-5xl mb-4">💡</div>
-                    <h3 class="text-2xl font-bold mb-2 text-pink-400">앱 & 챗봇 개발</h3>
-                    <p class="text-gray-400">
-                        세상의 문제를 해결하고 사람들과 소통하는 앱과 챗봇을 만드는 것이 목표입니다. 다양한 기술을 배우고 적용하여 저만의 아이디어를 실현해 나갈 것입니다.
-                    </p>
+
+                <!-- 결과 표시 영역 -->
+                <div id="resultOutput" class="mt-8 p-6 bg-gray-50 rounded-lg hidden border-l-4 border-l-orange-500">
+                    <h3 id="resultTitle" class="text-2xl font-bold mb-3 text-orange-500"></h3>
+                    <p id="resultContent" class="text-gray-700 whitespace-pre-wrap"></p>
                 </div>
             </div>
         </section>
 
-        <!-- 2. 눈부신 작품 (포트폴리오) 섹션 -->
-        <section id="projects" class="mb-20">
-            <h2 class="text-4xl font-extrabold mb-12 text-center dazzling-text">
-                ✨ My Dazzling Projects (작품 자랑)
+        <!-- 4. 🔗 외부 콘텐츠 섹션: Gemini 공유 링크 임베딩 (개선됨) -->
+        <section id="gemini-link" class="mb-20">
+            <h2 class="text-4xl font-extrabold mb-8 text-center dazzling-text">
+                🔗 규리님의 참고 자료: 외부 콘텐츠 임베딩 (Gemini 공유)
             </h2>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- 프로젝트 1 (챗봇) -->
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('감성 영화 추천 챗봇', '사용자의 현재 기분을 분석하여 가장 어울리는 영화를 추천해주는 AI 챗봇입니다. (Python, Gemini API 활용 예정)')">
-                    <span class="text-4xl block mb-3">🤖</span>
-                    <h3 class="text-xl font-bold mb-2 text-orange-400">감성 영화 추천 챗봇 (미정)</h3>
-                    <p class="text-sm text-gray-500 mb-3">#AI #챗봇 #영화 #개인화</p>
-                    <p class="text-gray-400 text-sm">현재 기획 중인 프로젝트입니다. 영화에 대한 애정을 담아 사용자 맞춤형 추천 기능을 구현할 예정입니다.</p>
+            <div class="max-w-3xl mx-auto p-8 rounded-xl bg-white shadow-xl border border-red-500">
+                <p class="text-gray-600 mb-6 text-center font-medium">
+                    규리님께서 중요하다고 지정하신 외부 자료 (미래 수입 예상) 입니다.
+                </p>
+                <div class="relative overflow-hidden w-full rounded-xl shadow-lg" style="padding-top: 75%;">
+                    <!-- iframe을 사용하여 Gemini 공유 링크를 포함합니다. (약 4:3 비율 유지) -->
+                    <iframe 
+                        src="https://gemini.google.com/share/f40804b3dbf9" 
+                        title="규리님 Gemini 공유 콘텐츠"
+                        class="absolute top-0 left-0 w-full h-full border-4 border-gray-300 rounded-xl"
+                        allowfullscreen
+                    ></iframe>
                 </div>
-
-                <!-- 프로젝트 2 (앱) -->
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('학교 생활 캘린더 앱', '명신여고 학생들을 위한 맞춤형 학사 일정 관리 및 스터디 그룹 매칭 모바일 앱입니다. (React Native 예정)')">
-                    <span class="text-4xl block mb-3">🗓️</span>
-                    <h3 class="text-xl font-bold mb-2 text-green-400">학교 생활 캘린더 앱 (미정)</h3>
-                    <p class="text-sm text-gray-500 mb-3">#모바일앱 #학교생활 #커뮤니티 #생산성</p>
-                    <p class="text-gray-400 text-sm">학교 친구들과 함께 쓸 수 있는 유용한 도구를 만들어 보고 싶습니다.</p>
-                </div>
-
-                <!-- 프로젝트 3 (데이터 시각화) -->
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('내가 본 영화 통계 대시보드', '관람한 영화 데이터를 수집하여 장르, 감독, 배우별 통계를 인터랙티브하게 시각화하는 웹사이트입니다. (D3.js 예정)')">
-                    <span class="text-4xl block mb-3">📊</span>
-                    <h3 class="text-xl font-bold mb-2 text-yellow-400">영화 시각화 대시보드 (미정)</h3>
-                    <p class="text-sm text-gray-500 mb-3">#데이터분석 #시각화 #웹개발 #취미</p>
-                    <p class="text-gray-400 text-sm">취미를 데이터로 분석하며 개발 실력을 향상시키고자 합니다.</p>
-                </div>
-
-                <!-- 프로젝트 4 (자율 프로젝트) -->
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('미래의 아이디어 공간', '앞으로 배우고 싶은 기술과 새로운 아이디어를 정리하고 구체화할 프로젝트를 위한 공간입니다.')">
-                    <span class="text-4xl block mb-3">🚀</span>
-                    <h3 class="text-xl font-bold mb-2 text-blue-400">Next Project (구상 중)</h3>
-                    <p class="text-sm text-gray-500 mb-3">#아이디어 #기술스택 #신규도전</p>
-                    <p class="text-gray-400 text-sm">항상 새로운 기술에 도전하고, 사용자에게 가치를 줄 수 있는 프로젝트를 고민합니다.</p>
-                </div>
-
-                <!-- (반응형 데모를 위해 더미 프로젝트 2개 추가) -->
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('더미 프로젝트 5', '반응형 레이아웃 데모를 위한 더미 프로젝트입니다.')">
-                    <span class="text-4xl block mb-3">🌟</span>
-                    <h3 class="text-xl font-bold mb-2 text-red-400">더미 프로젝트 5</h3>
-                    <p class="text-sm text-gray-500 mb-3">#Demo #Placeholder</p>
-                    <p class="text-gray-400 text-sm">레이아웃 테스트용입니다.</p>
-                </div>
-
-                <div class="p-6 rounded-xl project-card" onclick="showMessageBox('더미 프로젝트 6', '반응형 레이아웃 데모를 위한 더미 프로젝트입니다.')">
-                    <span class="text-4xl block mb-3">🌈</span>
-                    <h3 class="text-xl font-bold mb-2 text-indigo-400">더미 프로젝트 6</h3>
-                    <p class="text-sm text-gray-500 mb-3">#Demo #Placeholder</p>
-                    <p class="text-gray-400 text-sm">레이아웃 테스트용입니다.</p>
-                </div>
+                <p class="text-sm text-red-500 mt-4 text-center font-bold">
+                    ⚠️ 주의: 외부 사이트 보안 정책으로 인해 내용이 표시되지 않을 수 있습니다. 
+                    <a href="https://gemini.google.com/share/f40804b3dbf9" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline">여기를 클릭하여 새 창에서 원본 내용을 확인</a>해 주세요.
+                </p>
             </div>
         </section>
 
-    </main>
+    </main>
 
-    <!-- 푸터 -->
-    <footer class="bg-gray-800 py-8 mt-10 text-center text-gray-400">
-        <p class="text-sm">
-            © 2025 박규리 포트폴리오 | 개발자로 성장하는 이야기
-        </p>
-        <p class="text-xs mt-2">
-            명신여고 박규리 학생을 응원합니다!
-        </p>
-    </footer>
+    <!-- 푸터 - 밝은 배경에 맞게 조정 -->
+    <footer class="bg-gray-200 py-8 mt-10 text-center text-gray-600">
+        <p class="text-sm">
+            © 2025 박규리 포트폴리오 | 개발자로 성장하는 이야기
+        </p>
+        <p class="text-xs mt-2">
+            명신여고 박규리 학생을 응원합니다!
+        </p>
+    </footer>
 
-    <!-- 자바스크립트 for Interactivity (메시지 박스) -->
-    <script>
+    <!-- 자바스크립트 for Interactivity (메시지 박스 & Gemini API) -->
+    <script>
+        // Gemini API 설정
+        const apiKey = ""; // Canvas 환경에서 자동 주입됩니다.
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        /**
+         * alert() 대신 사용할 커스텀 메시지 박스를 보여줍니다.
+         * @param {string} title - 메시지 박스의 제목
+         * @param {string} content - 메시지 박스의 내용
+         */
+        function showMessageBox(title, content) {
+            document.getElementById('messageTitle').textContent = title;
+            document.getElementById('messageContent').textContent = content;
+            document.getElementById('messageBox').classList.remove('hidden');
+        }
+
+        /**
+         * 메시지 박스를 숨깁니다.
+         */
+        function hideMessageBox() {
+            document.getElementById('messageBox').classList.add('hidden');
+        }
+
+        // 초기 로드 시 메시지 박스 닫기
+        document.addEventListener('DOMContentLoaded', hideMessageBox);
+
         /**
-         * alert() 대신 사용할 커스텀 메시지 박스를 보여줍니다.
-         * @param {string} title - 메시지 박스의 제목
-         * @param {string} content - 메시지 박스의 내용
+         * LLM을 호출하여 영화 및 개발 아이디어를 생성합니다.
          */
-        function showMessageBox(title, content) {
-            document.getElementById('messageTitle').textContent = title;
-            document.getElementById('messageContent').textContent = content;
-            document.getElementById('messageBox').classList.remove('hidden');
+        async function generateIdea() {
+            const inputElement = document.getElementById('ideaInput');
+            const prompt = inputElement.value.trim();
+            const resultOutput = document.getElementById('resultOutput');
+            
+            if (!prompt) {
+                showMessageBox('입력 오류', '기분이나 아이디어를 입력해주세요.');
+                return;
+            }
+
+            setLoading(true);
+            resultOutput.classList.add('hidden');
+
+            const systemPrompt = "당신은 창의적이고 감성적인 영화 및 개발 아이디어 큐레이터입니다. 사용자의 기분이나 아이디어를 바탕으로 긍정적이고 영감을 주는 응답을 한국어로 작성해 주세요. 응답은 제목(예: 🎬 추천 영화 제목 & 영감), 내용, 그리고 규리 학생을 위한 개발 아이디어 제안을 포함해야 합니다. 내용은 최대 150자로 요약하고 친근한 어조를 사용하세요. 응답 형식은 반드시 '제목: [제목]\n내용: [내용]\n개발 아이디어: [아이디어]' 형태여야 합니다.";
+            
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                config: {
+                    temperature: 0.8
+                }
+            };
+
+            let attempts = 0;
+            const maxAttempts = 3;
+            let success = false;
+            let generatedText = '';
+
+            while (attempts < maxAttempts && !success) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API response status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (generatedText) {
+                        success = true;
+                    } else {
+                        throw new Error("Generated content is empty.");
+                    }
+
+                } catch (error) {
+                    console.error(`Attempt ${attempts + 1} failed:`, error);
+                    attempts++;
+                    if (attempts < maxAttempts) {
+                        // Exponential backoff
+                        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 1000));
+                    } else {
+                        showMessageBox('오류 발생', '아이디어를 생성하는 데 실패했습니다. 다시 시도해 주세요.');
+                        setLoading(false);
+                        return;
+                    }
+                }
+            }
+
+            setLoading(false);
+
+            if (generatedText) {
+                displayResult(generatedText);
+            }
         }
 
         /**
-         * 메시지 박스를 숨깁니다.
+         * 생성된 텍스트를 파싱하여 결과를 표시합니다.
+         * @param {string} text - Gemini API로부터 받은 텍스트.
          */
-        function hideMessageBox() {
-            document.getElementById('messageBox').classList.add('hidden');
+        function displayResult(text) {
+            const resultOutput = document.getElementById('resultOutput');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultContent = document.getElementById('resultContent');
+
+            // 텍스트를 제목, 내용, 아이디어로 파싱 (정해진 형식을 기반으로)
+            const lines = text.split('\n');
+            let title = '아이디어 생성 결과';
+            let parsedContent = '';
+            
+            lines.forEach(line => {
+                if (line.startsWith('제목:')) {
+                    title = line.substring(4).trim();
+                } else if (line.startsWith('내용:')) {
+                    parsedContent += '🤔 내용: ' + line.substring(4).trim() + '\n\n';
+                } else if (line.startsWith('개발 아이디어:')) {
+                    parsedContent += '💡 개발 아이디어: ' + line.substring(7).trim() + '\n';
+                }
+            });
+
+            if (title === '아이디어 생성 결과' && parsedContent === '') {
+                 // 파싱 실패 시 원본 텍스트 전체 표시
+                 title = '아이디어 생성 결과 (원본)';
+                 parsedContent = text;
+            }
+
+            resultTitle.textContent = title;
+            resultContent.textContent = parsedContent;
+            resultOutput.classList.remove('hidden');
         }
 
-        // 초기 로드 시 메시지 박스 닫기
-        document.addEventListener('DOMContentLoaded', hideMessageBox);
+        /**
+         * 로딩 상태를 토글합니다.
+         * @param {boolean} isLoading - 로딩 중인지 여부.
+         */
+        function setLoading(isLoading) {
+            const button = document.getElementById('generateButton');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const inputElement = document.getElementById('ideaInput');
+
+            if (isLoading) {
+                button.disabled = true;
+                loadingIndicator.classList.remove('hidden');
+                button.textContent = '생성 중...';
+                inputElement.readOnly = true;
+            } else {
+                button.disabled = false;
+                loadingIndicator.classList.add('hidden');
+                button.textContent = '✨ AI 영화 & 아이디어 생성하기';
+                inputElement.readOnly = false;
+            }
+        }
+    </script>
+</body>
+</html>
